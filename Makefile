@@ -1,23 +1,38 @@
-NAME = push_swap
+NAME	= push_swap
 
-SRCS	=	$(shell echo *.c)
+SRCS	= free.c		\
+		  ft_atoi.c		\
+		  grouping.c	\
+		  main.c		\
+		  max_to_a.c	\
+		  pre_sort.c	\
+		  push_swap.c	\
+		  sort.c		\
+		  tool_push.c	\
+		  tool_r.c		\
+		  tool_rrev.c	\
+		  tool_s.c		\
 
-OBJDIR = obj/
+INCLUDE_DIR = include
+SRCDIR = ./srcs/
+OBJDIR = ./obj/
 
 OBJS = $(SRCS:%.c=$(OBJDIR)%.o)
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 all: $(OBJDIR) $(NAME)
 
-$(OBJDIR):
-	mkdir -p obj
-
-$(OBJDIR)%.o: %.c
-		$(CC) $(CFLAGS) -c -o $@ $<
-
-$(NAME): $(OBJS)
+$(NAME): $(OBJDIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -rf $(OBJDIR)
